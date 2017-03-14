@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MvpProject</string>
     <string name="title_activity_clock">ClockActivity</string>
+    <string name="title_activity_ipc">IpcActivity</string>
+    <string name="title_activity_ipc2">Ipc2Activity</string>
 </resources>

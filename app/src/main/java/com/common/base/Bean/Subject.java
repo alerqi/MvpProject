@@ -1,11 +1,14 @@
 package com.common.base.Bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /***
  * 电影类目
  */
-public class Subject {
+public class Subject implements Parcelable{
 
     private String id;
     private String alt;
@@ -16,6 +19,27 @@ public class Subject {
     private List<Cast> casts;
     private List<Cast> directors;
     private Avatars images;
+
+    protected Subject(Parcel in) {
+        id = in.readString();
+        alt = in.readString();
+        year = in.readString();
+        title = in.readString();
+        original_title = in.readString();
+        genres = in.createStringArrayList();
+    }
+
+    public static final Creator<Subject> CREATOR = new Creator<Subject>() {
+        @Override
+        public Subject createFromParcel(Parcel in) {
+            return new Subject(in);
+        }
+
+        @Override
+        public Subject[] newArray(int size) {
+            return new Subject[size];
+        }
+    };
 
     @Override
     public String toString() {
@@ -95,6 +119,21 @@ public class Subject {
 
     public void setImages(Avatars images) {
         this.images = images;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(alt);
+        dest.writeString(year);
+        dest.writeString(title);
+        dest.writeString(original_title);
+        dest.writeStringList(genres);
     }
 
     private class Cast{
